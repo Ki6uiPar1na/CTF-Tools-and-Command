@@ -70,6 +70,9 @@ These tools help in penetration testing of web applications.
 | **SQLmap**     | Automated SQL injection tool          | `sqlmap -u [target_url]` |
 | **Gobuster**   | Directory and file brute-forcing      | `gobuster dir -u [URL]`  |
 
+
+- Burpsuite for windows ([Download](https://portswigger.net/burp/communitydownload))
+
 ---
 
 ## 🕵️‍♂️ Forensics Tools  
