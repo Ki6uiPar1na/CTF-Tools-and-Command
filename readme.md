@@ -24,10 +24,6 @@ This repository contains a collection of useful tools and commands for Kali Linu
 
 ---
 
-## ![Kali Linux Logo](https://www.kali.org/images/kali-logo.svg)
-
----
-
 ## 💻 Basic Linux Commands  
 
 These are fundamental commands every Kali Linux user should know.
