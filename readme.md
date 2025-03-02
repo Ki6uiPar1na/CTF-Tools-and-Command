@@ -50,5 +50,10 @@ curl -X GET http://example.com/../../etc/passwd
 
 ## Steganography Tools
 
-- **[Aperisolve](https://www.aperisolve.com/)**
+- [Aperisolve](https://www.aperisolve.com/)
+
+**To view file metadata in command line**
+
+```bash
+exiftool [filename]
 
