@@ -50,5 +50,5 @@ curl -X GET http://example.com/../../etc/passwd
 
 ## Steganography Tools
 
-- **Aperisolve**: [Aperisolve](https://www.aperisolve.com/)
+- **[Aperisolve](https://www.aperisolve.com/)**
 
