@@ -13,6 +13,7 @@ This repository contains a collection of useful tools and commands for Kali Linu
 2. [Web Exploitation Tools](#web-exploitation-tools)
 3. [Forensics Tools](#forensics-tools)
 4. [Miscellaneous Commands](#miscellaneous-commands)
+5. [Steganography Tools](#steganography-tools)
 
 ## ![Kali Linux Logo](https://www.kali.org/images/kali-logo.svg)
 
@@ -40,6 +41,13 @@ These tools are designed for web application testing.
 - **Nikto**: A web server scanner for identifying vulnerabilities.
   - Start Nikto scan: `nikto -h [target]`
 
+## 
+
 ### Command for Directory Traversal Testing:
 ```bash
 curl -X GET http://example.com/../../etc/passwd
+```
+
+## Steganography Tools
+href: https://github.com
+
