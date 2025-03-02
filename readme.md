@@ -53,7 +53,7 @@ curl -X GET http://example.com/../../etc/passwd
 - [Aperisolve](https://www.aperisolve.com/)
 
 
--**To view file metadata in command line**
+- **To view file metadata in command line**
 
 ```bash
 exiftool [filename]
