@@ -125,7 +125,9 @@ These are fundamental Linux commands every Kali Linux user should know.
 
 If you want to contribute, feel free to open an issue or submit a pull request.
 
-💌 Contact: [Your Email or GitHub Profile]
+💌 Contact: 
+[Email](khairulislamtushar33@gmail.com)
+[GitHub](https://github.com/Ki6uiPar1na)
 
 ---
 
